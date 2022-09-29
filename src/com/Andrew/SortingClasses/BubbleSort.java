@@ -1,6 +1,6 @@
 package com.Andrew.SortingClasses;
 
-public class BubbleSort {
+public class BubbleSort extends Sort{
     //Need to keep track of each iteration?
     //Build a constructor
 
@@ -25,16 +25,5 @@ public class BubbleSort {
             iteration++;
         }while(checkNotSorted(array));
         System.out.println("Took " + iteration + " Iterations");
-    }
-
-    public Boolean checkNotSorted(int[] array){
-        for(int i = 0; i < array.length - 1; i++){
-            if(array[i] > array[i+1]){
-//                System.out.println("False");
-                return true;
-            }
-        }
-//        System.out.println("True");
-        return false;
     }
 }
