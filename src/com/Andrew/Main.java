@@ -13,23 +13,37 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Please insert an Array: ");
+
+        System.out.println("Would you like to...");
+        System.out.println("1: Generate an Array");
+        System.out.println("2: Provide your own.");
         Scanner scan = new Scanner(System.in);
-        String str = scan.nextLine();
+        String choice = scan.nextLine();
 
+        int[] array;
 
-        //[1,2,4,56,12,432,1234,543,124,6534,9413,134,3]
-        //Parse string into an array.
-        String[] string = str.replaceAll("\\[", "")
-                .replaceAll("]", "")
-                .split(",");
+        if(Integer.parseInt(choice) == 2) {
+            System.out.println("Please insert an Array: ");
+            String str = scan.nextLine();
 
-        // declaring an array with the size of string
-        int[] array = new int[string.length];
+            //[1,2,4,56,12,432,1234,543,124,6534,9413,134,3]
+            //Parse string into an array.
+            String[] string = str.replaceAll("\\[", "")
+                    .replaceAll("]", "")
+                    .split(",");
 
-        for (int i = 0; i < string.length; i++) {
-            array[i] = Integer.valueOf(string[i]);
+            // declaring an array with the size of string
+            array = new int[string.length];
+
+            for (int i = 0; i < string.length; i++) {
+                array[i] = Integer.valueOf(string[i]);
+            }
+
+        }else{
+            randomArrayGenerator rand = new randomArrayGenerator();
+            array = rand.generateArray(10, 100);
         }
+
 
         System.out.println(" You provided : " );
         displayArray(array);
