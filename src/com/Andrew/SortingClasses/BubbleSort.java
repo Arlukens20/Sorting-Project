@@ -21,9 +21,11 @@ public class BubbleSort extends Sort{
             for(int i: array){
                 System.out.print(i + " ");
             }
+
            //check sorted here?
             iteration++;
         }while(checkNotSorted(array));
+
         System.out.println("Took " + iteration + " Iterations");
     }
 }

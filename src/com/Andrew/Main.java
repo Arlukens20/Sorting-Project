@@ -4,6 +4,8 @@ import com.Andrew.SortingClasses.BubbleSort;
 import com.Andrew.SortingClasses.InsertSort;
 import com.Andrew.SortingClasses.QuickSort;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -29,13 +31,19 @@ public class Main {
             array[i] = Integer.valueOf(string[i]);
         }
 
-        System.out.println(" You provided : " + array);
+        System.out.println(" You provided : " );
+        displayArray(array);
+
         System.out.println("What kind of sort would you like to do?");
         System.out.println("1: Simple Sort");
         System.out.println("2: Bubble Sort");
         System.out.println("3: Quick Sort");
         System.out.println("4: Insert Sort");
         int i = scan.nextInt();
+
+        System.out.println("Working ...");
+
+        long startTime = System.currentTimeMillis();
 
         switch (i) {
             case 1:
@@ -56,14 +64,45 @@ public class Main {
             default:
                 System.out.println("Index " + i + "is not implemented Please try again.");
         }
-        System.out.println("Working ...");
+        long endTime = System.currentTimeMillis();
 
-        System.out.println(" Your Sorted Array is : ");
+        //Display Array
+        System.out.println("Your Sorted Array is : ");
+        displayArray(array);
+        buildChart(array);
+
+        //Time Calculator
+        long totalTime = endTime - startTime;
+        System.out.println("Total Time: " + totalTime + " MilliSeconds");
+    }
+
+    public static void displayArray(int[] array){
         for (int j = 0; j < array.length; j++) {
             System.out.print(array[j]);
             if(j < array.length - 1){
                 System.out.print(',');
             }
         }
+        System.out.println("");
+    }
+
+
+    public static void buildChart(int [] array) {
+
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("Array");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(350, 300);
+
+        String title = "My Title";
+        String[] labels = new String[]{"num"};
+        Color[] colors = new Color[]{
+                Color.red,
+        };
+
+        BarChart bc = new BarChart(array, labels, colors, title);
+
+        frame.add(bc);
+        frame.setVisible(true);
     }
 }

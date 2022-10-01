@@ -23,6 +23,7 @@ public class InsertSort {
             for(int index: arr){
                 System.out.print(index + " ");
             }
+
             System.out.println();
         }
     }
