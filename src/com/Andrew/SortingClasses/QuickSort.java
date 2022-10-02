@@ -1,4 +1,5 @@
 package com.Andrew.SortingClasses;
+
 //Code from https://www.geeksforgeeks.org/quick-sort/
 
 public class QuickSort extends Sort{
@@ -40,13 +41,4 @@ public class QuickSort extends Sort{
 
         return i+1;
     }
-
-    public void printArray(int arr[])
-    {
-        int n = arr.length;
-        for (int i=0; i<n; ++i)
-            System.out.print(arr[i]+" ");
-        System.out.println();
-    }
 }
-

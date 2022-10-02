@@ -1,8 +1,6 @@
 package com.Andrew;
 
-import com.Andrew.SortingClasses.BubbleSort;
-import com.Andrew.SortingClasses.InsertSort;
-import com.Andrew.SortingClasses.QuickSort;
+import com.Andrew.SortingClasses.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,6 +51,8 @@ public class Main {
         System.out.println("2: Bubble Sort");
         System.out.println("3: Quick Sort");
         System.out.println("4: Insert Sort");
+        System.out.println("5: Merge Sort");
+        System.out.println("6: Selection Sort");
         int i = scan.nextInt();
 
         System.out.println("Working ...");
@@ -75,6 +75,14 @@ public class Main {
                 InsertSort in = new InsertSort();
                 in.insertionSort(array, array.length);
                 break;
+            case 5:
+                MergeSort ob = new MergeSort();
+                ob.sort(array, 0, array.length-1);
+                break;
+            case 6:
+                SelectionSort obj = new SelectionSort();
+                obj.sort(array);
+                break;
             default:
                 System.out.println("Index " + i + "is not implemented Please try again.");
         }
@@ -83,7 +91,7 @@ public class Main {
         //Display Array
         System.out.println("Your Sorted Array is : ");
         displayArray(array);
-        buildChart(array);
+//        buildChart(array);
 
         //Time Calculator
         long totalTime = endTime - startTime;
