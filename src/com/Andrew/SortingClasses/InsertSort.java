@@ -2,7 +2,7 @@ package com.Andrew.SortingClasses;
 //Code from https://www.geeksforgeeks.org/insertion-sort/
 
 public class InsertSort {
-   public void insertionSort(int arr[], int n)
+   public int[] insertionSort(int arr[], int n)
     {
         int i = 0;
         int key = 0;
@@ -23,8 +23,8 @@ public class InsertSort {
             for(int index: arr){
                 System.out.print(index + " ");
             }
-
             System.out.println();
         }
+        return arr;
     }
 }

@@ -6,7 +6,7 @@ public class BubbleSort extends Sort{
     //Need to keep track of each iteration?
     //Build a constructor
 
-    public void BuSort(int[] array){
+    public int[] BuSort(int[] array){
         int iteration = 0;
 
         do{
@@ -23,11 +23,13 @@ public class BubbleSort extends Sort{
             for(int i: array){
                 System.out.print(i + " ");
             }
+            System.out.println();
 
            //check sorted here?
             iteration++;
         }while(checkNotSorted(array));
 
         System.out.println("Took " + iteration + " Iterations");
+        return array;
     }
 }
