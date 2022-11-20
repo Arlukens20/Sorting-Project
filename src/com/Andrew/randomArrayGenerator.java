@@ -1,5 +1,7 @@
 package com.Andrew;
 
+import java.util.Arrays;
+
 public class randomArrayGenerator {
 
     public int[] generateArray(int length,int distribution){
@@ -14,5 +16,7 @@ public class randomArrayGenerator {
         return array;
     }
 
-
+    public String convertToString(int[] array){
+        return Arrays.toString(array);
+    }
 }

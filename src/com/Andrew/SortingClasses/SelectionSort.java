@@ -22,6 +22,11 @@ public class SelectionSort extends Sort{
             int temp = arr[min_idx];
             arr[min_idx] = arr[i];
             arr[i] = temp;
+
+            //Print out for Decoding
+            for(int j: arr){
+                System.out.print(j + " ");
+            }
         }
     }
 }
