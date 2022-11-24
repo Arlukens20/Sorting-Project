@@ -11,8 +11,10 @@ import java.util.Arrays;
 public class swingGui extends JPanel implements ActionListener {
         private final static String newline = "\n";
         JTextField textField;
+        JTextField textFieldTwo;
         JTextArea textArea;
     JFrame jframe = new JFrame("Main Screen");
+    JFrame visualize = new JFrame("Visualize");
 
     public swingGui(){
 
@@ -33,8 +35,10 @@ public class swingGui extends JPanel implements ActionListener {
         //create two more option in FILE button
         JMenuItem fileMenu1 = new JMenuItem("Generate Array");
         JMenuItem fileMenu2 = new JMenuItem("Provide Array");
+        JMenuItem fileMenu3 = new JMenuItem("Create Array");
         fileMenu.add(fileMenu1);
         fileMenu.add(fileMenu2);
+        fileMenu.add(fileMenu3);
 
         JMenuItem sortMenu1 = new JMenuItem("Bubble Sort");
         JMenuItem sortMenu2 = new JMenuItem("Counting Sort");
@@ -67,25 +71,40 @@ public class swingGui extends JPanel implements ActionListener {
         panel.add(btn_send);
         panel.add(btn_reset);
 
+
+        //Create the panel at bottom and add label, textArea and buttons
+        JPanel panelTwo = new JPanel(); // this panel is not visible in output
+        JLabel labelTwo = new JLabel("Please Construct");
+        textFieldTwo = new JTextField(15); // accepts upto 15 characters
+        JButton btn_Add = new JButton("Add to Array");
+
+        panelTwo.add(labelTwo);
+        panelTwo.add(textFieldTwo);
+        panelTwo.add(btn_Add);
+
         //Actions
         btn_send.addActionListener(this::actionPerformed);
-        btn_reset.addActionListener(this::actionPerformedReset);
-        fileMenu1.addActionListener(this::actionPerformedGenerate);
+        btn_Add.addActionListener(this::actionPerformed_add);
+        btn_reset.addActionListener(this::actionPerformed_Reset);
+        fileMenu1.addActionListener(this::actionPerformed_Generate);
 
         //Sorting Actions
-        sortMenu1.addActionListener(this::actionPerformedBubble);
-        sortMenu2.addActionListener(this::actionPerformedCounting);
-        sortMenu3.addActionListener(this::actionPerformedInsert);
-        sortMenu4.addActionListener(this::actionPerformedMerge);
-        sortMenu5.addActionListener(this::actionPerformedQuick);
-        sortMenu6.addActionListener(this::actionPerformedSelect);
-        sortMenu7.addActionListener(this::actionPerformedSort);
+        sortMenu1.addActionListener(this::actionPerformed_Bubble);
+        sortMenu2.addActionListener(this::actionPerformed_Counting);
+        sortMenu3.addActionListener(this::actionPerformed_Insert);
+        sortMenu4.addActionListener(this::actionPerformed_Merge);
+        sortMenu5.addActionListener(this::actionPerformed_Quick);
+        sortMenu6.addActionListener(this::actionPerformed_Select);
+        sortMenu7.addActionListener(this::actionPerformed_Sort);
 
-        jframe.getContentPane().add(BorderLayout.SOUTH, panel);
+        //Adding the constructor options to a simple panel.
+        JPanel optionPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+        optionPanel.add(panel);
+        optionPanel.add(panelTwo);
+
+        jframe.getContentPane().add(BorderLayout.SOUTH, optionPanel);
         jframe.getContentPane().add(BorderLayout.NORTH, menuBar);
         jframe.getContentPane().add(BorderLayout.CENTER, textArea);
-
-
 
         jframe.pack();
         jframe.setVisible(true);
@@ -98,7 +117,15 @@ public class swingGui extends JPanel implements ActionListener {
         textField.setEnabled(false);
     }
 
-    public void actionPerformedReset(ActionEvent e) {
+    public void actionPerformed_add(ActionEvent e) {
+        System.out.println("Testing Add");
+        textArea.append(addToArray(textArea.getText(),textFieldTwo.getText()));
+        JOptionPane.showMessageDialog(this.jframe, "Submitted");
+        textField.setEnabled(false);
+    }
+
+
+    public void actionPerformed_Reset(ActionEvent e) {
         System.out.println("Testing Reset");
         textArea.selectAll();
         textField.selectAll();
@@ -108,15 +135,15 @@ public class swingGui extends JPanel implements ActionListener {
         textField.setEnabled(true);
     }
 
-    public void actionPerformedGenerate(ActionEvent e) {
+    public void actionPerformed_Generate(ActionEvent e) {
         System.out.println("Testing Generate");
         randomArrayGenerator rand = new randomArrayGenerator();
-           textArea.setText(rand.convertToString(rand.generateArray(10, 100)));
+        textArea.setText(rand.convertToString(rand.generateArray(10, 100)));
         JOptionPane.showMessageDialog(this.jframe, "Generate Array");
         textField.setEnabled(false);
     }
 
-    public void actionPerformedBubble(ActionEvent e) {
+    public void actionPerformed_Bubble(ActionEvent e) {
         try {
             BubbleSort bubble = new BubbleSort();
             int[] arr = convertStringtoInt(textArea.getText());
@@ -128,7 +155,7 @@ public class swingGui extends JPanel implements ActionListener {
         }
     }
 
-    public void actionPerformedInsert(ActionEvent e) {
+    public void actionPerformed_Insert(ActionEvent e) {
         try{
             InsertSort sort = new InsertSort();
             int[] arr = convertStringtoInt(textArea.getText());
@@ -140,7 +167,7 @@ public class swingGui extends JPanel implements ActionListener {
         }
     }
 
-    public void actionPerformedMerge(ActionEvent e) {
+    public void actionPerformed_Merge(ActionEvent e) {
         try{
             MergeSort sort = new MergeSort();
             int[] arr = convertStringtoInt(textArea.getText());
@@ -152,7 +179,7 @@ public class swingGui extends JPanel implements ActionListener {
         }
     }
 
-    public void actionPerformedQuick(ActionEvent e) {
+    public void actionPerformed_Quick(ActionEvent e) {
         try{
             QuickSort qs = new QuickSort();
             int[] arr = convertStringtoInt(textArea.getText());
@@ -164,7 +191,7 @@ public class swingGui extends JPanel implements ActionListener {
         }
     }
 
-    public void actionPerformedSelect(ActionEvent e) {
+    public void actionPerformed_Select(ActionEvent e) {
         try{
             SelectionSort sort = new SelectionSort();
             int[] arr = convertStringtoInt(textArea.getText());
@@ -176,19 +203,20 @@ public class swingGui extends JPanel implements ActionListener {
         }
     }
 
-    public void actionPerformedSort(ActionEvent e) {
+    public void actionPerformed_Sort(ActionEvent e) {
         try{
             int[] arr = convertStringtoInt(textArea.getText());
             Arrays.sort(arr);
             textArea.setText(Arrays.toString(arr));
             JOptionPane.showMessageDialog(this.jframe, "Simple Sort");
+            showVisualizer();
         }catch (Exception exception){
             JOptionPane.showMessageDialog(this.jframe, "Error","Error",JOptionPane.ERROR_MESSAGE);
         }
     }
 
     //Not implemented
-    public void actionPerformedCounting(ActionEvent e) {
+    public void actionPerformed_Counting(ActionEvent e) {
         try {
             CountingSort sort = new CountingSort();
             int[] arr = convertStringtoInt(textArea.getText());
@@ -215,5 +243,37 @@ public class swingGui extends JPanel implements ActionListener {
         }
 
         return array;
+    }
+
+    public void showVisualizer(){
+        jframe.pack();
+        jframe.setVisible(false);
+
+        textArea = new JTextArea(5, 20);
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        textArea.setText("HelloWorld");
+        visualize.add(textArea);
+
+        visualize.pack();
+        visualize.setVisible(true);
+    }
+
+
+    //TODO this is not working as expected!!
+    public String addToArray(String array, String element){
+
+        String[] string = array.replaceAll("\\[", "")
+                .replaceAll("]", "")
+                .split(",");
+        int[] arr = new int[string.length + 1];
+
+        for (int i = 0; i < string.length - 1; i++) {
+            arr[i] = Integer.valueOf(string[i]);
+        }
+
+        string[string.length-1] = element;
+
+        return string.toString();
     }
 }
