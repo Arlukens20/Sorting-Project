@@ -11,7 +11,39 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
+        //Build GUI interface here.
+        swingGui element = new swingGui();
+    }
 
+    public static void displayArray(int[] array){
+        for (int j = 0; j < array.length; j++) {
+            System.out.print(array[j]);
+            if(j < array.length - 1){
+                System.out.print(',');
+            }
+        }
+        System.out.println("");
+    }
+
+    public static void buildChart(int [] array) {
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("Array");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(350, 300);
+
+        String title = "My Title";
+        String[] labels = new String[]{"num"};
+        Color[] colors = new Color[]{
+                Color.red,
+        };
+
+        BarChart bc = new BarChart(array, labels, colors, title);
+
+        frame.add(bc);
+        frame.setVisible(true);
+    }
+
+    public void consoleVersion() {
         System.out.println("Would you like to...");
         System.out.println("1: Generate an Array");
         System.out.println("2: Provide your own.");
@@ -96,35 +128,5 @@ public class Main {
         //Time Calculator
         long totalTime = endTime - startTime;
         System.out.println("Total Time: " + totalTime + " MilliSeconds");
-    }
-
-    public static void displayArray(int[] array){
-        for (int j = 0; j < array.length; j++) {
-            System.out.print(array[j]);
-            if(j < array.length - 1){
-                System.out.print(',');
-            }
-        }
-        System.out.println("");
-    }
-
-
-    public static void buildChart(int [] array) {
-
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("Array");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(350, 300);
-
-        String title = "My Title";
-        String[] labels = new String[]{"num"};
-        Color[] colors = new Color[]{
-                Color.red,
-        };
-
-        BarChart bc = new BarChart(array, labels, colors, title);
-
-        frame.add(bc);
-        frame.setVisible(true);
     }
 }
